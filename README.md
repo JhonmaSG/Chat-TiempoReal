@@ -2,6 +2,9 @@
 
 Este es un proyecto de chat en tiempo real con una interfaz sencilla y funcional.
 
+>[!NOTE]
+> Se uso NodeJS v22.12.00 y Express v4.21.2
+
 ## Características
 - Envío y recepción de mensajes en tiempo real.
 - Diferenciación de usuarios con distintos colores en la interfaz.
