@@ -6,6 +6,9 @@ Este es un proyecto de chat en tiempo real con una interfaz sencilla y funcional
 > Se uso NodeJS v22.12.00
 > Express v4.21.2
 
+>[!IMPORTANT]
+>Puede tomar un tiempo acceder al aplicativo por reconstrucción
+
 ## Prueba el Chat
 https://chat-tiemporeal.onrender.com/
 
