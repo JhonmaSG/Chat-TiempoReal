@@ -46,6 +46,16 @@ async function setupDatabase () {
 // Init db
 await setupDatabase()
 
+setInterval(async () => {
+  try {
+    await db.execute('DELETE FROM messages')
+    console.log('Chat messages cleared automatically after 24 hours.')
+    io.emit('chatCleared')
+  } catch (error) {
+    console.error('Error clearing messages:', error)
+  }
+}, 24 * 60 * 60 * 1000)
+
 io.on('connection', async (socket) => {
   console.log('a user has connected!')
 
