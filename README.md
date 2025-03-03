@@ -7,7 +7,7 @@ Este es un proyecto de chat en tiempo real con una interfaz sencilla y funcional
 > Express v4.21.2
 
 >[!IMPORTANT]
->Puede tomar un tiempo acceder al aplicativo por reconstrucción
+>Puede tomar un tiempo acceder al aplicativo por la reconstrucción del proyecto
 
 ## Prueba el Chat
 https://chat-tiemporeal.onrender.com/
