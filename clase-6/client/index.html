@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>JhonmaSG_Chat</title>
+
+  <script type="module">
+    import { io } from 'https://cdn.socket.io/4.8.1/socket.io.esm.min.js'
+
+    const getUserData = async () => {
+      const storedUser = localStorage.getItem('userData')
+      if (storedUser) {
+        console.log(`User existed`, JSON.parse(storedUser))
+        return JSON.parse(storedUser)
+      }
+
+      const res = await fetch('https://random-data-api.com/api/users/random_user')
+      const { username: randomUsername, avatar } = await res.json()
+
+      const userData = { username: randomUsername, avatar }
+      localStorage.setItem('userData', JSON.stringify(userData))
+      return userData
+    }
+
+    const userData = await getUserData()
+
+    const socket = io({
+      auth: {
+        username: userData.username,
+        avatar: userData.avatar,
+        serverOffset: 0
+      }
+    })
+
+    const form = document.getElementById('form')
+    const input = document.getElementById('input')
+    const messages = document.getElementById('messages')
+    const clearChat = document.getElementById('clearChat')
+
+    socket.on('chat message', (msg, serverOffset, username, avatar) => {
+      const item = `<li>
+        <img src="${avatar}" alt="${username}" width="40" height="40" style="border-radius: 50%;">
+        <small>${username} :</small> <p>${msg}</p>
+      </li>`
+      messages.insertAdjacentHTML('beforeend', item)
+      socket.auth.serverOffset = serverOffset
+      // scroll to bottom of messages
+      messages.scrollTop = messages.scrollHeight
+    })
+
+    socket.on('chatCleared', () => {
+      document.getElementById('messages').innerHTML = '';
+    })
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      if (input.value) {
+        socket.emit('chat message', input.value)
+        input.value = ''
+      }
+    })
+
+    clearChat.addEventListener('click', () => {
+      if (confirm("¿Estás seguro de que quieres borrar el chat? Esta acción no se puede deshacer.")) {
+        document.getElementById('messages').innerHTML = ""
+        socket.emit('clearChat')
+      }
+    })
+
+    /* Button change theme*/
+    const toggleButton = document.getElementById('theme-toggle');
+
+    // Verifica si hay un tema guardado en localStorage
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      toggleButton.textContent = '🌞';
+    } else {
+      document.body.classList.add('dark-mode');
+      toggleButton.textContent = '🌙';
+    }
+
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      document.body.classList.toggle('dark-mode');
+
+      // Guarda el estado en localStorage
+      if (document.body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+        toggleButton.textContent = '🌞';
+      } else {
+        localStorage.setItem('theme', 'dark');
+        toggleButton.textContent = '🌙';
+      }
+    })
+
+  </script>
+
+</head>
+
+<body>
+  <button id="theme-toggle">🌙</button>
+  <div id="content">
+    <div id="content-logo-title">
+      <img src="./img/logo.png" width="80px" alt="Logo">
+      <h1>JhonmaSG_Chat</h1>
+    </div>
+    <p>Este proyecto esta inspirado en el curso de <b>Node.js</b> de midudev.</p>
+    <p><b>Chat en tiempo real con persistencia de datos.</b></p>
+  </div>
+
+  <section id="chat">
+    <ul id="messages"></ul>
+    <form id="form">
+      <input type="text" name="message" id="input" placeholder="Type a message" autocomplete="off" />
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <div id="content">
+    <details>
+      <summary>Descripción</summary>
+      <p>Se pone en practica <b>Node.js</b> con
+        <b>Express</b>, <b>Turso.tech</b> para la Base de datos y
+        <b>Socket.io</b> para la comunicación bidireccional entre los diferentes chats, junto con una <b>API</b>
+        (random-data-api) para los nombres de users y avatares.
+      </p>
+      <button id="clearChat">Borrar Chat</button>
+
+    </details>
+  </div>
+
+</body>
+
+</html>

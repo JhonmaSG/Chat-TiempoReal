@@ -1,0 +1,285 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light dark;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(0deg, #000000, #0e1c35);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+/*-------------------------------------------------*/
+/* Estilos generales CHANGE THEME*/
+body {
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Modo claro (por defecto) */
+.light-theme {
+    background-color: white;
+    color: black;
+}
+
+/* Modo oscuro */
+.dark-theme {
+    background: linear-gradient(0deg, #000000, #0e1c35);
+    color: white;
+}
+
+/* Tema claro */
+.light-mode {
+    background: linear-gradient(0deg, #ffffff, #dfe9f3);
+    color: black;
+}
+/*-------------------------------------------------*/
+.light-mode #theme-toggle {
+    background-color: #ddd;
+    color: black;
+}
+
+.light-mode #theme-toggle:hover {
+    background-color: #bbb;
+}
+
+/* Estilo del botón */
+#theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #444;
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: #666;
+}
+
+/* Estilo en modo claro */
+.light-mode #input {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #ccc;
+}
+/*-------------------------------------------------*/
+/* Estilo barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+}
+
+/* Modo oscuro */
+.dark-theme ::-webkit-scrollbar {
+    background-color: #0e1c35;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background-color: #444;
+}
+
+/*--------------------------------------------*/
+/* Estilos tema claro */
+.light-mode #messages li {
+    background-color: #f0f0f0 !important;
+    color: black;
+}
+
+/* Alternar colores*/
+.light-mode #messages li:nth-child(odd) {
+    background-color: #f0f0f0 !important;
+    color: black;
+}
+
+.light-mode #messages li:nth-child(even) {
+    background-color: #f5f5f5 !important;
+    color: black;
+}
+
+/* Estilos tema oscuro */
+.dark-mode #messages li {
+    background-color: #222 !important;
+    color: white;
+}
+
+.dark-mode #messages li:nth-child(odd) {
+    background-color: #333 !important;
+    color: white;
+}
+
+.dark-mode #messages li:nth-child(even) {
+    background-color: #444 !important;
+    color: white;
+}
+
+/*--------------------------------------------*/
+
+/* Modo claro */
+.light-mode ::-webkit-scrollbar {
+    background-color: #dfe9f3;
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+}
+
+/*------------------------------------------*/
+
+/* Mejorar contraste modo claro */
+.light-mode #input::placeholder {
+    color: #666;
+}
+/*-------------------------------------------------*/
+/* style to tittle and content top */
+#content {
+    margin-bottom: 5px;
+}
+
+#content-logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+}
+
+#content p {
+    max-width: 600px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* Style to chat and messages */
+#messages {
+    text-align: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    height: 94%;
+    scroll-behavior: smooth;
+    padding-bottom: 48px;
+}
+
+#messages>li {
+    background: #222;
+    display: flex;
+    padding: .1rem .5rem;
+    margin: 0;
+}
+
+#messages>li small {
+    padding: 1.1rem .5rem;
+    min-width: 140px;
+    font-weight: bold;
+}
+
+#messages>li:nth-child(odd) {
+    background: #000 !important;
+    color: #fff;
+}
+
+#chat {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 600px;
+    height: 80%;
+    position: relative;
+    margin-top: 10px;
+}
+
+/* Style Form */
+#form {
+    bottom: 0;
+    display: flex;
+    height: 48px;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+}
+
+#input {
+    border-radius: 9999px;
+    border: 1px solid #eee;
+    flex: 1;
+    margin: 4px;
+    padding: 0 8px;
+}
+
+#input:focus {
+    outline: 0;
+}
+
+#form>button {
+    background: #09f;
+    color: #fff;
+    border: 0;
+    margin: 4px;
+    border-radius: 4px;
+}
+
+#form>button:hover {
+    background: #0cf;
+}
+/*-------------------------------------------------*/
+/* Animation to Description */
+details {
+    padding-top: 10px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+details[open] {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+summary {
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#clearChat {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#clearChat:hover {
+    background-color: #cc0000;
+}
